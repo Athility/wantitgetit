@@ -1,0 +1,66 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Extract version from tag
+        id: version
+        shell: bash
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Restore
+        run: dotnet restore StreamDesk.sln
+
+      - name: Build and test
+        run: dotnet test StreamDesk.sln -c Release
+
+      - name: Publish self-contained Windows x64
+        run: dotnet publish src/StreamDesk.App -c Release -r win-x64 --self-contained true -p:Version=${{ steps.version.outputs.version }} -p:InformationalVersion=${{ steps.version.outputs.version }} -o publish
+
+      - name: Package
+        shell: pwsh
+        run: Compress-Archive -Path publish/* -DestinationPath "StreamDesk-Windows-x64-${{ github.ref_name }}.zip"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: StreamDesk ${{ github.ref_name }}
+          body: |
+            StreamDesk ${{ github.ref_name }}
+
+            Self-contained Windows x64 build — no runtime installation required.
+
+            ## Highlights
+            - Netflix/Jellyfin-style home, movies, TV and anime browsing
+            - Global search (Ctrl+K), media details with seasons and episodes
+            - Dark / light / system themes
+            - Local library, TMDB metadata, M3U/M3U8 Live TV
+            - Authorized-API provider slots (MovieBox, 4KHDHub) — off until configured
+            - VLC / mpv playback, external subtitles (SRT/VTT/ASS)
+            - Download queue with pause, resume (HTTP range) and restart recovery
+            - Favorites, continue-watching history, full keyboard navigation
+
+            ## Install
+            1. Download **StreamDesk-Windows-x64-${{ github.ref_name }}.zip**
+            2. Extract and run **StreamDesk.exe**
+
+            See the README for VLC/mpv setup, TMDB configuration, M3U playlists and provider docs.
+          files: |
+            StreamDesk-Windows-x64-${{ github.ref_name }}.zip
