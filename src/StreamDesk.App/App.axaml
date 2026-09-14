@@ -11,14 +11,14 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="avares://StreamDesk.App/Themes/Tokens.axaml" />
-                <ResourceInclude Source="avares://StreamDesk.App/Themes/LightDark.axaml" />
+                <ResourceInclude Source="avares://StreamDesk/Themes/Tokens.axaml" />
+                <ResourceInclude Source="avares://StreamDesk/Themes/LightDark.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 
     <Application.Styles>
         <FluentTheme />
-        <StyleInclude Source="avares://StreamDesk.App/Themes/Controls.axaml" />
+        <StyleInclude Source="avares://StreamDesk/Themes/Controls.axaml" />
     </Application.Styles>
 </Application>
