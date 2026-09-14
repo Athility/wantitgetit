@@ -1,0 +1,73 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+publish/
+artifacts/
+
+# Visual Studio / Rider / VS Code cache/options
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Test results
+TestResults/
+[Tt]est[Rr]esult/
+*.coverage
+*.trx
+
+# NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+
+# Local databases / storage (never commit user data or local dbs)
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+data/
+storage/
+
+# Secrets and environment files (never commit)
+.env
+.env.*
+*.env
+secrets.json
+appsettings.*.local.json
+**/secrets/
+
+# Generated binaries / packages
+*.zip
+*.7z
+*.exe
+*.msi
+*.appx
+!src/StreamDesk.App/app.manifest
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Freebuff workspace metadata
+.freebuff/
