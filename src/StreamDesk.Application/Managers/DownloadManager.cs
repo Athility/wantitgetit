@@ -73,6 +73,15 @@ public sealed class DownloadManager : IAsyncDisposable
 
     public DownloadTask Enqueue(string itemId, string providerId, string title, string? subLabel, string url, string? destinationOverride = null, long? totalBytes = null)
     {
+        var activeDuplicate = _tasks.Values.FirstOrDefault(t =>
+            t.ItemId == itemId
+            && t.ProviderId == providerId
+            && t.Status is DownloadStatus.Queued or DownloadStatus.Downloading or DownloadStatus.Paused);
+        if (activeDuplicate is not null)
+        {
+            throw new InvalidOperationException($"'{title}' is already in the download queue.");
+        }
+
         var options = _options();
         var fileName = destinationOverride ?? SanitizeFileName(title);
         var destination = Path.Combine(options.DownloadDirectory, fileName);

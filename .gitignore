@@ -47,7 +47,7 @@ project.lock.json
 *.sqlite
 *.sqlite3
 data/
-storage/
+/storage/
 
 # Secrets and environment files (never commit)
 .env

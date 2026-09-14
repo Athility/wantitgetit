@@ -7,9 +7,9 @@ namespace StreamDesk.Application.Services;
 /// <summary>Default settings service over the JSON settings store.</summary>
 public sealed class SettingsService : ISettingsService
 {
-    private readonly AppSettingsStore _store;
+    private readonly IAppSettingsStore _store;
 
-    public SettingsService(AppSettingsStore store)
+    public SettingsService(IAppSettingsStore store)
     {
         _store = store;
         Current = new AppSettings();

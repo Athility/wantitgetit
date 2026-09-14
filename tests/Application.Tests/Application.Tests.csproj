@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
@@ -16,6 +16,13 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\StreamDesk.Core\StreamDesk.Core.csproj" />
+    <ProjectReference Include="..\..\src\StreamDesk.Infrastructure\StreamDesk.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\StreamDesk.Application\StreamDesk.Application.csproj" />
+    <ProjectReference Include="..\..\src\StreamDesk.Providers\StreamDesk.Providers.csproj" />
   </ItemGroup>
 
 </Project>

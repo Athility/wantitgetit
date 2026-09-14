@@ -237,7 +237,7 @@ public sealed class TmdbProvider : IMediaProvider, ISearchProvider, ISelfTestPro
             Year = ParseYear(date),
             Rating = dto.VoteAverage is > 0 ? dto.VoteAverage : null,
             RuntimeMinutes = dto.Runtime ?? dto.EpisodeRunTime?.FirstOrDefault(),
-            Genres = dto.Genres?.Select(g => g.Name).ToList() ?? new List<string>(),
+            Genres = dto.Genres?.Select(g => g.Name ?? string.Empty).ToList() ?? new List<string>(),
             Cast = dto.Credits?.Cast?.Take(12)
                 .Select(c => new CastMember(c.Name ?? string.Empty, c.Character, Image(c.ProfilePath, Config.ProfileSize)))
                 .ToList() ?? new List<CastMember>(),

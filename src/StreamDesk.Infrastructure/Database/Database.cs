@@ -53,6 +53,14 @@ public sealed class Database : IDisposable
     public void Migrate()
     {
         using var transaction = _connection.BeginTransaction();
+
+        using (var ensure = _connection.CreateCommand())
+        {
+            ensure.Transaction = transaction;
+            ensure.CommandText = "CREATE TABLE IF NOT EXISTS schema_version (version INTEGER PRIMARY KEY, applied_at_utc TEXT NOT NULL);";
+            ensure.ExecuteNonQuery();
+        }
+
         void Apply(int version, string sql)
         {
             using var command = _connection.CreateCommand();

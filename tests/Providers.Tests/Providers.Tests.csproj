@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -16,6 +16,12 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\StreamDesk.Application\StreamDesk.Application.csproj" />
+    <ProjectReference Include="..\..\src\StreamDesk.Infrastructure\StreamDesk.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\StreamDesk.Providers\StreamDesk.Providers.csproj" />
   </ItemGroup>
 
 </Project>
