@@ -1,0 +1,150 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:StreamDesk.App.ViewModels"
+             x:Class="StreamDesk.App.Views.SettingsView">
+    <ScrollViewer Padding="28,10">
+        <StackPanel Spacing="8" MaxWidth="860" HorizontalAlignment="Left">
+            <TextBlock Text="Settings" Classes="h1" Margin="0,6,0,10" />
+
+            <!-- Appearance -->
+            <TextBlock Text="APPEARANCE" Classes="sectionTitle" />
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,6">
+                <RadioButton Content="System" GroupName="theme" IsChecked="{Binding IsSystemTheme}" />
+                <RadioButton Content="Dark" GroupName="theme" IsChecked="{Binding IsDarkTheme}" />
+                <RadioButton Content="Light" GroupName="theme" IsChecked="{Binding IsLightTheme}" />
+            </StackPanel>
+
+            <!-- Playback -->
+            <TextBlock Text="PLAYBACK" Classes="sectionTitle" />
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,6">
+                <TextBlock Text="Preferred player:" VerticalAlignment="Center" Classes="secondary" />
+                <ComboBox MinWidth="160" SelectedIndex="{Binding PreferredPlayerIndex}">
+                    <ComboBoxItem Content="Auto detect" />
+                    <ComboBoxItem Content="VLC" />
+                    <ComboBoxItem Content="mpv" />
+                </ComboBox>
+            </StackPanel>
+            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,6">
+                <TextBlock Grid.Column="0" Text="VLC path:" Classes="secondary" VerticalAlignment="Center" Margin="0,0,10,0" />
+                <TextBox Grid.Column="1" Text="{Binding VlcPath}" Watermark="C:\Program Files\VideoLAN\VLC\vlc.exe" />
+                <Button Grid.Column="2" Classes="subtle" Content="Browse…" Margin="8,0,0,0" Click="OnPickVlc" />
+            </Grid>
+            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,6">
+                <TextBlock Grid.Column="0" Text="mpv path:" Classes="secondary" VerticalAlignment="Center" Margin="0,0,10,0" />
+                <TextBox Grid.Column="1" Text="{Binding MpvPath}" Watermark="C:\Program Files\mpv\mpv.exe" />
+                <Button Grid.Column="2" Classes="subtle" Content="Browse…" Margin="8,0,0,0" Click="OnPickMpv" />
+            </Grid>
+
+            <!-- Subtitles -->
+            <TextBlock Text="SUBTITLES" Classes="sectionTitle" />
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,6">
+                <TextBlock Text="Preferred language:" Classes="secondary" VerticalAlignment="Center" />
+                <ComboBox MinWidth="140" SelectedIndex="{Binding SubtitleLanguageIndex}">
+                    <ComboBoxItem Content="Auto" />
+                    <ComboBoxItem Content="English" />
+                    <ComboBoxItem Content="Hindi" />
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Downloads -->
+            <TextBlock Text="DOWNLOADS" Classes="sectionTitle" />
+            <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,6">
+                <TextBlock Grid.Column="0" Text="Download folder:" Classes="secondary" VerticalAlignment="Center" Margin="0,0,10,0" />
+                <TextBox Grid.Column="1" Text="{Binding DownloadDirectory}" />
+                <Button Grid.Column="2" Classes="subtle" Content="Browse…" Margin="8,0,0,0" Click="OnPickDownloadFolder" />
+            </Grid>
+
+            <!-- Media Providers -->
+            <TextBlock Text="MEDIA PROVIDERS" Classes="sectionTitle" />
+            <ItemsControl ItemsSource="{Binding Providers}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Classes="card" Margin="0,0,0,10" Padding="16">
+                            <StackPanel Spacing="6">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" FontSize="15"
+                                               Foreground="{DynamicResource TextPrimaryBrush}" />
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                                        <Button Classes="subtle" Content="Test Connection" Click="OnTestProvider" />
+                                        <ToggleButton Content="Enabled" IsChecked="{Binding IsEnabled}" />
+                                    </StackPanel>
+                                </Grid>
+                                <TextBlock Text="{Binding StatusLabel}" Classes="secondary" />
+                                <TextBlock Text="{Binding Description}" Classes="secondary" TextWrapping="Wrap" />
+                                <TextBlock Text="{Binding CapabilitiesLabel}" Classes="tertiary" TextWrapping="Wrap" />
+                                <TextBlock Text="{Binding TestResult}" Classes="secondary" TextWrapping="Wrap"
+                                           IsVisible="{Binding HasTestResult}" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- API configuration -->
+            <TextBlock Text="PROVIDER CONFIGURATION" Classes="sectionTitle" />
+            <TextBlock Text="TMDB API key (metadata provider):" Classes="secondary" />
+            <TextBox Text="{Binding TmdbApiKey}" Watermark="TMDB v3 API key" Margin="0,0,0,10" />
+            <TextBlock Text="MovieBox — authorized API base URL and key:" Classes="secondary" />
+            <TextBox Text="{Binding MovieBoxBaseUrl}" Watermark="https://api.example-moviebox.com/" Margin="0,0,0,4" />
+            <TextBox Text="{Binding MovieBoxApiKey}" Watermark="API key issued to you" Margin="0,0,0,10" />
+            <TextBlock Text="4KHDHub — authorized API base URL and key:" Classes="secondary" />
+            <TextBox Text="{Binding FourKBaseUrl}" Watermark="https://api.example-4khdhub.com/" Margin="0,0,0,4" />
+            <TextBox Text="{Binding FourKApiKey}" Watermark="API key issued to you" Margin="0,0,0,10" />
+            <Button Classes="subtle" Content="Save provider settings" Click="OnSaveProviderSettings" Margin="0,0,0,10" />
+
+            <!-- Local Library -->
+            <TextBlock Text="LOCAL LIBRARY" Classes="sectionTitle" />
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,8">
+                <Button Classes="accent" Content="Add folder…" Click="OnAddLibraryFolder" />
+                <Button Classes="subtle" Content="Scan now" Click="OnScanLibrary" />
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding LibraryFolders}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Classes="card" Margin="0,0,0,8" Padding="12">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Text="{Binding Path}" Classes="secondary" />
+                                <Button Grid.Column="1" Classes="subtle" Content="Remove" Click="OnRemoveFolder" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Live TV playlists -->
+            <TextBlock Text="LIVE TV PLAYLISTS" Classes="sectionTitle" />
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,8">
+                <Button Classes="accent" Content="Import file…" Click="OnImportPlaylist" />
+                <Button Classes="subtle" Content="Test all providers" Click="OnTestAll" />
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding Playlists}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Classes="card" Margin="0,0,0,8" Padding="12">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" />
+                                    <TextBlock Text="{Binding Url}" Classes="tertiary"
+                                               IsVisible="{Binding IsRemote}" />
+                                    <TextBlock Text="{Binding FilePath}" Classes="tertiary"
+                                               IsVisible="{Binding !IsRemote}" />
+                                </StackPanel>
+                                <Button Grid.Column="1" Classes="subtle" Content="Remove" Click="OnRemovePlaylist" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Application -->
+            <TextBlock Text="APPLICATION" Classes="sectionTitle" />
+            <TextBlock Text="{Binding VersionLabel}" Classes="secondary" />
+            <TextBlock Text="{Binding RepoUrl}" Classes="secondary" Margin="0,0,0,8" />
+            <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,30">
+                <Button Classes="subtle" Content="Reset settings" Click="OnResetSettings" />
+            </StackPanel>
+
+            <TextBlock Text="{Binding TestResult}" Classes="secondary" TextWrapping="Wrap" Margin="0,0,0,30" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

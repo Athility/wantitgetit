@@ -1,0 +1,94 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="StreamDesk.App.Views.DetailsView">
+    <Grid RowDefinitions="Auto,*">
+        <!-- Backdrop header -->
+        <Border Grid.Row="0" Height="230" Background="{DynamicResource CardHoverBrush}">
+            <Panel>
+                <Image Source="{Binding Backdrop}" Stretch="UniformToFill"
+                       IsVisible="{Binding HasBackdrop}" />
+                <Border VerticalAlignment="Bottom" Height="80"
+                        Background="{DynamicResource OverlayScrimBrush}" Opacity="0.6" />
+            </Panel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" Margin="0,-70,0,0">
+            <StackPanel Margin="30,0,30,30">
+                <!-- Title row -->
+                <Grid ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,14">
+                    <Border Grid.Column="0" Width="130" Height="190" CornerRadius="10"
+                            Background="{DynamicResource CardBrush}" Margin="0,0,18,0">
+                        <Image Source="{Binding Poster}" Stretch="UniformToFill"
+                               IsVisible="{Binding HasPoster}" />
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Spacing="6">
+                        <TextBlock Text="{Binding Title}" Classes="h1" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding Tagline}" Classes="secondary" FontStyle="Italic"
+                                   IsVisible="{Binding HasTagline}" />
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="{Binding Year}" Classes="secondary" />
+                            <TextBlock Text="{Binding Runtime}" Classes="secondary" />
+                            <TextBlock Text="{Binding Rating}" Classes="secondary"
+                                       Foreground="{DynamicResource AccentBrush}"
+                                       IsVisible="{Binding HasRating}" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding Genres}" Classes="secondary"
+                                   IsVisible="{Binding HasGenres}" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Bottom" Spacing="10">
+                        <Button Classes="accent" Content="▶ Play" Click="OnPlay" />
+                        <Button Classes="subtle" Content="♥ Favorite" Click="OnFavorite" />
+                    </StackPanel>
+                </Grid>
+
+                <!-- Description -->
+                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="{DynamicResource TextSecondaryBrush}"
+                           FontSize="14" LineHeight="22" Margin="0,0,0,16" />
+
+                <!-- Cast -->
+                <TextBlock Text="{Binding CastLabel}" Classes="secondary" TextWrapping="Wrap"
+                           IsVisible="{Binding HasCast}"
+                           Margin="0,0,0,16" />
+
+                <!-- Seasons (shows/anime) -->
+                <StackPanel IsVisible="{Binding IsShow}">
+                    <TextBlock Text="Episodes" Classes="sectionTitle" />
+                    <ComboBox MinWidth="200" Margin="0,0,0,12"
+                              ItemsSource="{Binding Seasons}"
+                              SelectedItem="{Binding SelectedSeason}"
+                              DisplayMemberBinding="{Binding Name}" />
+                    <ItemsControl ItemsSource="{Binding SelectedSeason.Episodes}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Classes="card" Margin="0,0,0,10" Padding="12">
+                                    <Grid ColumnDefinitions="Auto,*,Auto">
+                                        <Border Grid.Column="0" Width="120" Height="68"
+                                                CornerRadius="6" Background="{DynamicResource CardHoverBrush}" Margin="0,0,12,0">
+                                            <Image Source="{Binding Thumbnail}" Stretch="UniformToFill"
+                                                   IsVisible="{Binding HasThumbnail}" />
+                                        </Border>
+                                        <StackPanel Grid.Column="1" Spacing="3">
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                                <TextBlock Text="{Binding Number}" FontWeight="SemiBold"
+                                                           Foreground="{DynamicResource AccentBrush}" />
+                                                <TextBlock Text="{Binding Title}" FontWeight="SemiBold"
+                                                           Foreground="{DynamicResource TextPrimaryBrush}" />
+                                                <TextBlock Text="{Binding Duration}" Classes="tertiary" />
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding Description}"
+                                                       Classes="secondary" TextTrimming="CharacterEllipsis" MaxHeight="34" />
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Spacing="8">
+                                            <Button Classes="accent" Content="Play" Click="OnPlayEpisode" />
+                                            <Button Classes="subtle" Content="↓" Click="OnDownloadEpisode" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

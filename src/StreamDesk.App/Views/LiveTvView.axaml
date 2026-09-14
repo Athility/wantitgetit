@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:StreamDesk.App.ViewModels"
+             x:Class="StreamDesk.App.Views.LiveTvView">
+    <Grid RowDefinitions="Auto,*" Margin="28,10">
+        <StackPanel Grid.Row="0" Spacing="10">
+            <TextBlock Text="Live TV" Classes="h1" Margin="0,6,0,0" />
+            <TextBlock Text="Loading playlists…" Classes="secondary" IsVisible="{Binding IsLoading}" />
+            <TextBlock Text="{Binding Error}" Classes="secondary" Foreground="{DynamicResource AccentBrush}"
+                       IsVisible="{Binding HasError}" />
+            <TextBlock Text="No channels. Import an M3U/M3U8 playlist in Settings → Live TV Playlists."
+                       Classes="secondary" IsVisible="{Binding HasNoChannels}" />
+
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBox Width="260" Watermark="Search channels…" Text="{Binding SearchText}" />
+                <ComboBox MinWidth="170" ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}"
+                          PlaceholderText="All groups" />
+                <ToggleButton Content="Favorites only" IsChecked="{Binding ShowFavoritesOnly}" />
+            </StackPanel>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Margin="0,12,0,0">
+            <ItemsControl ItemsSource="{Binding VisibleChannels}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Classes="card" Width="190" Margin="0,0,12,12" Padding="12">
+                            <StackPanel Spacing="6">
+                                <Border Height="52" Background="{DynamicResource CardHoverBrush}" CornerRadius="6">
+                                    <Image Source="{Binding Logo}" Stretch="Uniform" Margin="6"
+                                           IsVisible="{Binding HasLogo}" />
+                                </Border>
+                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="13"
+                                           Foreground="{DynamicResource TextPrimaryBrush}" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Text="{Binding Group}" Classes="tertiary" />
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <Button Classes="accent" Content="Play" Click="OnPlayChannel" />
+                                    <Button Classes="subtle" Click="OnToggleChannelFavorite">
+                                        <TextBlock Text="♥"
+                                                   Foreground="{Binding IsFavorite, Converter={x:Static vm:Converters.FavoriteToBrush}}" />
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

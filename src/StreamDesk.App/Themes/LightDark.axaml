@@ -1,0 +1,57 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="StreamDesk.App.Themes.LightDark">
+  <ResourceDictionary.ThemeDictionaries>
+    <!-- ===================== DARK (default) ===================== -->
+    <ResourceDictionary x:Key="Dark">
+      <Color x:Key="FillColorBkgColor">#0F1014</Color>
+      <Color x:Key="FillColorCardColor">#191B22</Color>
+      <Color x:Key="FillColorCardHoverColor">#22242E</Color>
+      <Color x:Key="FillColorElevatedColor">#1F2129</Color>
+      <Color x:Key="StrokeCardColor">#2A2D38</Color>
+      <Color x:Key="TextPrimaryColor">#F2F3F7</Color>
+      <Color x:Key="TextSecondaryColor">#A2A7B8</Color>
+      <Color x:Key="TextTertiaryColor">#6C7284</Color>
+      <Color x:Key="DividerColor">#262933</Color>
+      <Color x:Key="OverlayScrimColor">#CC000000</Color>
+      <Color x:Key="ProgressTrackColor">#2A2D38</Color>
+      <SolidColorBrush x:Key="BkgBrush" Color="{StaticResource FillColorBkgColor}" />
+      <SolidColorBrush x:Key="CardBrush" Color="{StaticResource FillColorCardColor}" />
+      <SolidColorBrush x:Key="CardHoverBrush" Color="{StaticResource FillColorCardHoverColor}" />
+      <SolidColorBrush x:Key="ElevatedBrush" Color="{StaticResource FillColorElevatedColor}" />
+      <SolidColorBrush x:Key="CardStrokeBrush" Color="{StaticResource StrokeCardColor}" />
+      <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}" />
+      <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}" />
+      <SolidColorBrush x:Key="TextTertiaryBrush" Color="{StaticResource TextTertiaryColor}" />
+      <SolidColorBrush x:Key="DividerBrush" Color="{StaticResource DividerColor}" />
+      <SolidColorBrush x:Key="OverlayScrimBrush" Color="{StaticResource OverlayScrimColor}" />
+      <SolidColorBrush x:Key="ProgressTrackBrush" Color="{StaticResource ProgressTrackColor}" />
+    </ResourceDictionary>
+
+    <!-- ===================== LIGHT ===================== -->
+    <ResourceDictionary x:Key="Light">
+      <Color x:Key="FillColorBkgColor">#F4F5F9</Color>
+      <Color x:Key="FillColorCardColor">#FFFFFF</Color>
+      <Color x:Key="FillColorCardHoverColor">#EDF0F7</Color>
+      <Color x:Key="FillColorElevatedColor">#FFFFFF</Color>
+      <Color x:Key="StrokeCardColor">#DCDFE8</Color>
+      <Color x:Key="TextPrimaryColor">#1A1C24</Color>
+      <Color x:Key="TextSecondaryColor">#5A6070</Color>
+      <Color x:Key="TextTertiaryColor">#8A90A2</Color>
+      <Color x:Key="DividerColor">#E3E6EE</Color>
+      <Color x:Key="OverlayScrimColor">#88000000</Color>
+      <Color x:Key="ProgressTrackColor">#E3E6EE</Color>
+      <SolidColorBrush x:Key="BkgBrush" Color="{StaticResource FillColorBkgColor}" />
+      <SolidColorBrush x:Key="CardBrush" Color="{StaticResource FillColorCardColor}" />
+      <SolidColorBrush x:Key="CardHoverBrush" Color="{StaticResource FillColorCardHoverColor}" />
+      <SolidColorBrush x:Key="ElevatedBrush" Color="{StaticResource FillColorElevatedColor}" />
+      <SolidColorBrush x:Key="CardStrokeBrush" Color="{StaticResource StrokeCardColor}" />
+      <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}" />
+      <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}" />
+      <SolidColorBrush x:Key="TextTertiaryBrush" Color="{StaticResource TextTertiaryColor}" />
+      <SolidColorBrush x:Key="DividerBrush" Color="{StaticResource DividerColor}" />
+      <SolidColorBrush x:Key="OverlayScrimBrush" Color="{StaticResource OverlayScrimColor}" />
+      <SolidColorBrush x:Key="ProgressTrackBrush" Color="{StaticResource ProgressTrackColor}" />
+    </ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

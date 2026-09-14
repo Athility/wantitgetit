@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:StreamDesk.App.Views"
+             x:Class="StreamDesk.App.Views.SearchView">
+    <ScrollViewer Padding="28,10">
+        <StackPanel Spacing="10">
+            <TextBlock Text="Search" Classes="h1" Margin="0,6,0,4" />
+            <TextBox Watermark="Search movies, shows, anime, channels…" Text="{Binding Query}" />
+
+            <TextBlock Text="Searching…" Classes="secondary" IsVisible="{Binding IsSearching}" />
+            <TextBlock Text="{Binding Error}" Classes="secondary" Foreground="{DynamicResource AccentBrush}"
+                       IsVisible="{Binding HasError}" />
+            <TextBlock Text="Type at least two characters to search."
+                       Classes="secondary" IsVisible="{Binding ShowEmptyHint}" />
+            <TextBlock Text="No results. Try a different search."
+                       Classes="secondary" IsVisible="{Binding ShowNoResults}" />
+
+            <ItemsControl ItemsSource="{Binding Results}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <views:MediaCardView Margin="0,0,12,14" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,61 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:StreamDesk.App.Views"
+             x:Class="StreamDesk.App.Views.HomeView">
+    <ScrollViewer Padding="28,10">
+        <StackPanel Spacing="4">
+            <TextBlock Text="Home" Classes="h1" Margin="0,6,0,4" />
+
+            <TextBlock Text="Loading your library…" Classes="secondary" Margin="0,20,0,0"
+                       IsVisible="{Binding IsLoading}" />
+
+            <TextBlock Text="Nothing to show yet. Configure a provider in Settings → Media Providers, add local folders, or check your network."
+                       Classes="secondary" Margin="0,20,0,0" TextWrapping="Wrap"
+                       IsVisible="{Binding HasError}" />
+
+            <!-- Continue Watching -->
+            <StackPanel IsVisible="{Binding HasContinueWatching}">
+                <TextBlock Text="Continue Watching" Classes="sectionTitle" />
+                <ItemsControl ItemsSource="{Binding ContinueWatching}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <views:MediaCardView Margin="0,0,12,8" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <!-- Catalog sections -->
+            <ItemsControl ItemsSource="{Binding Sections}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}" Classes="sectionTitle" />
+                            <ItemsControl ItemsSource="{Binding Items}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <views:MediaCardView Margin="0,0,12,8" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock Text="No sections available. Enable and configure a provider in Settings → Media Providers."
+                       Classes="secondary" Margin="0,20,0,30"
+                       IsVisible="{Binding SectionsEmpty}" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

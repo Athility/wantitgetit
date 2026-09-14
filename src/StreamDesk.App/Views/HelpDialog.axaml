@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="StreamDesk.App.Views.HelpDialog">
+    <StackPanel Spacing="10">
+        <TextBlock Text="StreamDesk Help" Classes="h2" />
+        <TextBlock Classes="secondary" TextWrapping="Wrap"
+                   Text="Browse movies, shows and anime from your configured providers, play them in VLC or mpv, watch Live TV from your own M3U playlists, and manage downloads." />
+
+        <TextBlock Text="Keyboard shortcuts" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,8,0,0" />
+        <TextBlock Classes="secondary" Text="Ctrl+K / Ctrl+F — Search&#10;Ctrl+L — Live TV&#10;Ctrl+D — Downloads&#10;Ctrl+, — Settings&#10;F1 — Help&#10;Esc — Back / close dialog&#10;Enter — Open selected item" />
+
+        <TextBlock Text="Providers" FontWeight="SemiBold" Foreground="{DynamicResource TextPrimaryBrush}" Margin="0,8,0,0" />
+        <TextBlock Classes="secondary" TextWrapping="Wrap"
+                   Text="TMDB supplies metadata and artwork once you add an API key. Local Library scans folders you choose. M3U Playlists power Live TV from files or URLs you import. MovieBox and 4KHDHub are adapter slots that stay disabled until an authorized API is configured." />
+
+        <Button Classes="accent" Content="Close" HorizontalAlignment="Right" Click="OnClose" />
+    </StackPanel>
+</UserControl>

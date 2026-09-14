@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="StreamDesk.App.Views.MediaCardView"
+             Width="150">
+    <UserControl.Styles>
+        <Style Selector="Border.posterCard">
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </UserControl.Styles>
+    <Border Classes="posterCard">
+        <Grid RowDefinitions="Auto,Auto" Margin="0,0,0,10">
+            <!-- Poster area -->
+            <Border Grid.Row="0" Height="200" Background="{DynamicResource CardHoverBrush}">
+                <Panel>
+                    <TextBlock Text="🎬" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Opacity="0.35" IsVisible="{Binding Poster, Converter={x:Static ObjectConverters.IsNull}}" />
+                    <Image Source="{Binding Poster}" Stretch="UniformToFill"
+                           IsVisible="{Binding Poster, Converter={x:Static ObjectConverters.IsNotNull}}" />
+                </Panel>
+            </Border>
+
+            <!-- Title / meta -->
+            <StackPanel Grid.Row="1" Margin="10,8,10,0" Spacing="2">
+                <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="13"
+                           Foreground="{DynamicResource TextPrimaryBrush}" TextTrimming="CharacterEllipsis" />
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <TextBlock Text="{Binding YearLabel}" Classes="tertiary" />
+                    <TextBlock Text="{Binding TypeLabel}" Classes="tertiary" />
+                    <TextBlock Text="{Binding RatingLabel}" Classes="tertiary"
+                               Foreground="{DynamicResource AccentBrush}" IsVisible="{Binding HasRating}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

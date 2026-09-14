@@ -16,6 +16,9 @@ public interface ISettingsService
     void Load();
 
     void Save();
+
+    /// <summary>Replace all settings with defaults and persist.</summary>
+    void ResetToDefaults();
 }
 
 /// <summary>Favorites across movies, shows, episodes and channels.</summary>

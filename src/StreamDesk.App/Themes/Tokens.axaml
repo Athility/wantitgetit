@@ -1,0 +1,19 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="StreamDesk.App.Themes.Tokens">
+  <!-- Accent (shared by dark and light) -->
+  <Color x:Key="AccentColor">#E50914</Color>
+  <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
+
+  <!-- Typography -->
+  <FontFamily x:Key="UiFont">fonts/Inter#Inter, Segoe UI, Arial</FontFamily>
+
+  <!-- Spacing and shape -->
+  <CornerRadius x:Key="CardCornerRadius">10</CornerRadius>
+  <CornerRadius x:Key="DialogCornerRadius">14</CornerRadius>
+  <Thickness x:Key="CardPadding">14</Thickness>
+  <Thickness x:Key="PagePadding">28,20,28,20</Thickness>
+
+  <!-- Semantic key -->
+  <x:String x:Key="App.ProductName">StreamDesk</x:String>
+</ResourceDictionary>

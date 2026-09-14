@@ -30,4 +30,11 @@ public sealed class SettingsService : ISettingsService
         _store.Save(Current);
         Changed?.Invoke();
     }
+
+    public void ResetToDefaults()
+    {
+        Current = new AppSettings();
+        _store.Save(Current);
+        Changed?.Invoke();
+    }
 }

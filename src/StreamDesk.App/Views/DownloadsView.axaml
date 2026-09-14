@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:StreamDesk.App.Views"
+             x:Class="StreamDesk.App.Views.DownloadsView">
+    <ScrollViewer Padding="28,10">
+        <StackPanel Spacing="6">
+            <TextBlock Text="Downloads" Classes="h1" Margin="0,6,0,4" />
+            <TextBlock Text="No downloads. Providers that permit downloads will offer a Download button on details pages."
+                       Classes="secondary" IsVisible="{Binding HasNone}" />
+
+            <TextBlock Text="ACTIVE" Classes="sectionTitle" IsVisible="{Binding HasActive}" />
+            <ItemsControl ItemsSource="{Binding Active}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <views:DownloadRow />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock Text="QUEUED / PAUSED" Classes="sectionTitle" IsVisible="{Binding HasQueued}" />
+            <ItemsControl ItemsSource="{Binding Queued}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <views:DownloadRow />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock Text="COMPLETED" Classes="sectionTitle" IsVisible="{Binding HasCompleted}" />
+            <ItemsControl ItemsSource="{Binding Completed}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <views:DownloadRow />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <TextBlock Text="FAILED" Classes="sectionTitle" IsVisible="{Binding HasFailed}" />
+            <ItemsControl ItemsSource="{Binding Failed}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <views:DownloadRow />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

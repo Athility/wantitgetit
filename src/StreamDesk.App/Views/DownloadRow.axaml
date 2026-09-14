@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="StreamDesk.App.Views.DownloadRow">
+    <Border Classes="card" Margin="0,0,0,10" Padding="16">
+        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Title}" FontWeight="SemiBold"
+                       Foreground="{DynamicResource TextPrimaryBrush}" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding StatusLabel}" Classes="secondary" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding SubLabel}" Classes="secondary" />
+
+            <ProgressBar Grid.Row="2" Grid.Column="0" Value="{Binding Percent}" Maximum="100"
+                         Height="6" CornerRadius="3" Margin="0,10,12,0"
+                         Foreground="{DynamicResource AccentBrush}" />
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Spacing="10" Margin="0,10,0,0">
+                <TextBlock Text="{Binding PercentLabel}" Classes="percentLabel" />
+                <TextBlock Text="{Binding Speed}" Classes="percentLabel" />
+                <TextBlock Text="{Binding Size}" Classes="percentLabel" />
+                <TextBlock Text="{Binding Remaining}" Classes="percentLabel" />
+                <Button Content="Pause" Classes="subtle" Click="OnPause" IsVisible="{Binding CanPause}" />
+                <Button Content="Resume" Classes="subtle" Click="OnResume" IsVisible="{Binding CanResume}" />
+                <Button Content="Cancel" Classes="subtle" Click="OnCancel" IsVisible="{Binding CanPause}" />
+                <Button Content="Delete" Classes="subtle" Click="OnDelete" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
