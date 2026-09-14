@@ -115,3 +115,28 @@ public interface IPlaylistProvider
     /// <summary>Force re-download/re-parse of the given playlist; all when null.</summary>
     Task RefreshAsync(string? playlistId = null, CancellationToken cancellationToken = default);
 }
+
+/// <summary>Result of a provider self-test (Settings → Test Connection).</summary>
+public sealed class ProviderTestResult
+{
+    public ProviderTestResult()
+    {
+    }
+
+    public ProviderTestResult(bool success, string? message = null)
+    {
+        Success = success;
+        Message = message;
+    }
+
+    public bool Success { get; set; }
+
+    public string? Message { get; set; }
+}
+
+/// <summary>Optional capability: providers that can verify their configuration.</summary>
+public interface ISelfTestProvider
+{
+    /// <summary>Verify the provider can operate; returns an honest result.</summary>
+    Task<ProviderTestResult> TestConnectionAsync(CancellationToken cancellationToken = default);
+}

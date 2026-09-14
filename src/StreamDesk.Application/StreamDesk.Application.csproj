@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StreamDesk.Core\StreamDesk.Core.csproj" />
+    <ProjectReference Include="..\StreamDesk.Infrastructure\StreamDesk.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

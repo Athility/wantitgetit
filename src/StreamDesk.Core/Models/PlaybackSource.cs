@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace StreamDesk.Core;
 
 /// <summary>Where a playable stream comes from.</summary>
@@ -40,4 +43,10 @@ public sealed class PlaybackSource
 
     /// <summary>Subtitle tracks to load alongside the source.</summary>
     public IReadOnlyList<SubtitleTrack> Subtitles { get; set; } = Array.Empty<SubtitleTrack>();
+
+    /// <summary>
+    /// Optional HTTP headers required by an authorized source (e.g. an API key
+    /// header). Passed to mpv via --http-header-fields; never logged.
+    /// </summary>
+    public IReadOnlyDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
 }
